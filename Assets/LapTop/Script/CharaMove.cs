@@ -8,7 +8,8 @@ public class CharaMove : MonoBehaviour
     float inputVertical;
     Rigidbody rb;
 
-    float moveSpeed = 3f;
+    public float moveSpeed = 3f;
+    public float jump_power;
 
     void Start()
     {
@@ -36,6 +37,11 @@ public class CharaMove : MonoBehaviour
         if (moveForward != Vector3.zero)
         {
             transform.rotation = Quaternion.LookRotation(moveForward);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(new Vector3(0,1,0) * jump_power, ForceMode.Impulse);
         }
     }
 }
