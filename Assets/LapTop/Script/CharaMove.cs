@@ -11,6 +11,9 @@ public class CharaMove : MonoBehaviour
     public float moveSpeed = 3f;
     public float jump_power;
 
+    public GameObject Key;
+    public static float key_count = 0;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -42,6 +45,15 @@ public class CharaMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(new Vector3(0,1,0) * jump_power, ForceMode.Impulse);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(Key.tag))
+        {
+            other.gameObject.SetActive(false);
+            key_count += 1;
         }
     }
 }
